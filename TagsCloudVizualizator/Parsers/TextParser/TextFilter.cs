@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MyStemWrapper;
 using TextParser.Infrastructure.IFilter;
 using TextParser.Infrastructure.WordRepresentation;
 
@@ -9,19 +8,17 @@ namespace TextParser
     public class TextFilter
     {
         private readonly IEnumerable<IWordFilter> filters;
+        private readonly ITextParser parser;
 
-        public TextFilter(IEnumerable<IWordFilter> filters)
+        public TextFilter(ITextParser parser, IEnumerable<IWordFilter> filters)
         {
+            this.parser = parser;
             this.filters = filters;
         }
 
         public IEnumerable<string> Filter(string file)
         {
-            var myStem = new MyStem();
-            myStem.PerformWithDefaultArguments(file);
-            var myStemParser = new MyStemResponceParser();
-            myStemParser.Load(myStem.Result);
-            var words = myStemParser.GetWords();
+            var words = parser.GetWords(file);
             return words.Select(ApplyFiltersToWord)
                 .Where(word => word.Value != null)
                 .Select(word => word.Value).ToList();

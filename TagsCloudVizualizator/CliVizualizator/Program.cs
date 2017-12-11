@@ -40,6 +40,7 @@ namespace CliVizualizator
             foreach (var filter in settings.Filters)
                 container.Register(Component.For<IWordFilter>()
                     .Instance(filter));
+            container.Register(Component.For<ITextParser>().ImplementedBy<MyStemResponceParser>());
             container.Register(Component.For<ImageFormat>().Instance(settings.ImageFileFormat));
             container.Register(Component.For<FontFamily>().Instance(settings.WordsFont));
             container.Register(Component.For<TextFilter>());

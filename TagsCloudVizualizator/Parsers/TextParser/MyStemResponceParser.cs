@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using MyStemWrapper;
 using TextParser.Infrastructure.WordRepresentation;
 
 namespace TextParser
 {
-    public class MyStemResponceParser
+    public class MyStemResponceParser : ITextParser
     {
         private readonly XmlDocument xDocument = new XmlDocument();
+        private readonly MyStem myStem = new MyStem();
 
         private readonly Dictionary<string, PartOfSpeech> partOfSpeeches = new Dictionary<string, PartOfSpeech>
         {
@@ -26,13 +28,10 @@ namespace TextParser
             {"V", PartOfSpeech.Verb}
         };
 
-        public void Load(string xml)
+        public IEnumerable<Word> GetWords(string file)
         {
-            xDocument.LoadXml(xml);
-        }
-
-        public IEnumerable<Word> GetWords()
-        {
+            myStem.PerformWithDefaultArguments(file);
+            xDocument.LoadXml(myStem.Result);
             var xpath = "/html/body/se/w";
             var words = new List<Word>();
             var xListNodes = xDocument?.SelectNodes(xpath);
