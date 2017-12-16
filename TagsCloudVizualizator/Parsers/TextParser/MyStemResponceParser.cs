@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml;
 using MyStemWrapper;
+using ResultOf;
 using TextParser.Infrastructure.WordRepresentation;
 
 namespace TextParser
@@ -28,15 +29,17 @@ namespace TextParser
             {"V", PartOfSpeech.Verb}
         };
 
-        public IEnumerable<Word> GetWords(string file)
+        public Result<IEnumerable<Word>> GetWords(string file)
         {
             myStem.PerformWithDefaultArguments(file);
-            xDocument.LoadXml(myStem.Result);
+            if (!myStem.PerformResult.IsSuccess)
+                return Result.Fail<IEnumerable<Word>>(myStem.PerformResult.Error);
+            xDocument.LoadXml(myStem.PerformResult.GetValueOrThrow());
             var xpath = "/html/body/se/w";
             var words = new List<Word>();
             var xListNodes = xDocument?.SelectNodes(xpath);
             if (xListNodes == null)
-                return null;
+                return Result.Fail<IEnumerable<Word>>("MyStem internal error: cant't parse xml response from MyStem");
             foreach (XmlNode node in xListNodes)
                 words.Add(new Word
                 {

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using ResultOf;
 using TextParser.Infrastructure.WordRepresentation;
 
 namespace TextParser
 {
     public interface ITextParser
     {
-        IEnumerable<Word> GetWords(string file);
+        Result<IEnumerable<Word>> GetWords(string file);
     }
 }

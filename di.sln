@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextParser", "TagsCloudVizualizator\Parsers\TextParser\TextParser.csproj", "{E2C90A0C-02AD-406A-BBC0-F0DAD6B6A332}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagsCloudVizualizator", "TagsCloudVizualizator\TagsCloudVizualizator\TagsCloudVizualizator.csproj", "{41B3213F-C702-4E42-984B-B7B9A3C3FE2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliVizualizator", "TagsCloudVizualizator\CliVizualizator\CliVizualizator.csproj", "{4BD5D0C9-78BC-4DDF-9EF7-5CE9EC92CC18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultOf", "TagsCloudVizualizator\ResultOf\ResultOf.csproj", "{E882160A-CB0A-420D-8045-615661864CA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,8 +65,15 @@ Global
 		{4BD5D0C9-78BC-4DDF-9EF7-5CE9EC92CC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BD5D0C9-78BC-4DDF-9EF7-5CE9EC92CC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD5D0C9-78BC-4DDF-9EF7-5CE9EC92CC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E882160A-CB0A-420D-8045-615661864CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E882160A-CB0A-420D-8045-615661864CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E882160A-CB0A-420D-8045-615661864CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E882160A-CB0A-420D-8045-615661864CA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7A1360C-A914-427F-974A-1D216C4F1A41}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ResultOf;
 using TextParser.Infrastructure.IFilter;
 using TextParser.Infrastructure.WordRepresentation;
 
@@ -16,10 +17,13 @@ namespace TextParser
             this.filters = filters;
         }
 
-        public IEnumerable<string> Filter(string file)
+        public Result<IEnumerable<string>> Filter(string file)
         {
-            var words = parser.GetWords(file);
-            return words.Select(ApplyFiltersToWord)
+            var parserResult = parser.GetWords(file);
+            if (!parserResult.IsSuccess)
+                return Result.Fail<IEnumerable<string>>("Can't parse input file becase of MyStem inner error.")
+                    .RefineError(parserResult.Error);
+            return parserResult.GetValueOrThrow().Select(ApplyFiltersToWord)
                 .Where(word => word.Value != null)
                 .Select(word => word.Value).ToList();
         }

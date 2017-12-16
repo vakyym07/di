@@ -75,6 +75,10 @@
       <Project>{e2c90a0c-02ad-406a-bbc0-f0dad6b6a332}</Project>
       <Name>TextParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ResultOf\ResultOf.csproj">
+      <Project>{e882160a-cb0a-420d-8045-615661864ca8}</Project>
+      <Name>ResultOf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TagsCloudVisualization\TagsCloudVizualization.csproj">
       <Project>{0DB1184B-CEC6-4533-B57A-D433E220F078}</Project>
       <Name>TagsCloudVizualization</Name>

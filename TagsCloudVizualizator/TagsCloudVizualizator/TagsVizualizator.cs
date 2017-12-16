@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using Draw;
+using ResultOf;
 using TextCloud;
 
 namespace TagsCloudVizualizator
@@ -20,12 +22,24 @@ namespace TagsCloudVizualizator
 
         public void VizualizeCloudByTextFile(string textFile, string imageFile)
         {
-            foreach (var word in cloudHandler.GetNextWord(textFile))
+            var cloudHandlerResult = cloudHandler.GetNextWord(textFile);
+            if (!cloudHandlerResult.IsSuccess)
+            {
+                cloudHandlerResult.OnFail(PrintErrorAndExit);
+            }
+
+            foreach (var word in cloudHandler.GetNextWord(textFile).GetValueOrThrow())
             {
                 drawer.DrawString(word.Word, word.StringFont, 
                     new SolidBrush(word.WordColor), word.Frame);
             }
             drawer.SaveImage(imageFile, imageFormat);
+        }
+
+        private void PrintErrorAndExit(string error)
+        {
+            Console.WriteLine(error);
+            Environment.Exit(1);
         }
     }
 }

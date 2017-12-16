@@ -15,6 +15,7 @@ namespace MyStemWrapper
                 FileName = "mystem.exe",
                 Arguments = args,
                 RedirectStandardOutput = true,
+                RedirectStandardError = true,
                 StandardOutputEncoding = Encoding.Default
             };
         }
