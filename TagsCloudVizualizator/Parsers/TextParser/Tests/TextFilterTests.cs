@@ -34,7 +34,7 @@ namespace TextParser.Tests
         public int TextFilter_WhenFilterByLength(int length)
         {
             var filter = new TextFilter(parser, new List<IWordFilter> {new FilterByLength(length)});
-            return filter.Filter(Arg.Any<string>()).Count();
+            return filter.Filter(Arg.Any<string>()).GetValueOrThrow().Count();
         }
 
         [TestCase(PartOfSpeech.Conj)]
@@ -44,7 +44,7 @@ namespace TextParser.Tests
         public void TextFilter_WhenFilterByPartOfSpeech(PartOfSpeech part)
         {
             var filter = new PartOfSpeechFilter(new[] {part});
-            var words = parser.GetWords(Arg.Any<string>()).Select(w => filter.Filter(w)).Where(w => w.Value != null);
+            var words = parser.GetWords(Arg.Any<string>()).GetValueOrThrow().Select(w => filter.Filter(w)).Where(w => w.Value != null);
             words.All(w => w.Part != part).Should().BeTrue();
         }
 
@@ -52,7 +52,7 @@ namespace TextParser.Tests
         public void TextFilter_WhenApplyLowerCase()
         {
             var filter = new TextFilter(parser, new List<IWordFilter> {new LowerCaseFilter()});
-            filter.Filter(Arg.Any<string>()).All(w => w.All(char.IsLower)).Should().BeTrue();
+            filter.Filter(Arg.Any<string>()).GetValueOrThrow().All(w => w.All(char.IsLower)).Should().BeTrue();
         }
 
         [Test]

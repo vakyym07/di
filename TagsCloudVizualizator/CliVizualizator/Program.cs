@@ -19,8 +19,10 @@ namespace CliVizualizator
                     var vizualizator = container.Resolve<TagsVizualizator>();
                     vizualizator.VizualizeCloudByTextFile(settings.InputFile, settings.OutputFile);
                 }
-                else 
+                else
+                {
                     Console.WriteLine(optionResult.Error);
+                }
             }
             else
             {

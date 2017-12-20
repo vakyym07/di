@@ -28,7 +28,7 @@ namespace TagsCloudVizualizator
                 cloudHandlerResult.OnFail(PrintErrorAndExit);
             }
 
-            foreach (var word in cloudHandler.GetNextWord(textFile).GetValueOrThrow())
+            foreach (var word in cloudHandlerResult.GetValueOrThrow())
             {
                 drawer.DrawString(word.Word, word.StringFont, 
                     new SolidBrush(word.WordColor), word.Frame);

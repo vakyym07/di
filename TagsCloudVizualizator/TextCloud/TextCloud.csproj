@@ -65,6 +65,10 @@
       <Project>{e2c90a0c-02ad-406a-bbc0-f0dad6b6a332}</Project>
       <Name>TextParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ResultOf\ResultOf.csproj">
+      <Project>{e882160a-cb0a-420d-8045-615661864ca8}</Project>
+      <Name>ResultOf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StatisticProvider\StatisticProvider.csproj">
       <Project>{7c22c25d-1c29-4d56-b32d-93834af9b176}</Project>
       <Name>StatisticProvider</Name>

@@ -76,6 +76,10 @@
       <Project>{E4BFD621-E466-45A9-B8D4-705EDD9B97EB}</Project>
       <Name>MyStemWrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ResultOf\ResultOf.csproj">
+      <Project>{e882160a-cb0a-420d-8045-615661864ca8}</Project>
+      <Name>ResultOf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

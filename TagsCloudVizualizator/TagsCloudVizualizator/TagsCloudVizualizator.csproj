@@ -49,6 +49,10 @@
       <Project>{7dc4e378-e1e4-4c43-8266-41caa9b22fe1}</Project>
       <Name>Draw</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ResultOf\ResultOf.csproj">
+      <Project>{e882160a-cb0a-420d-8045-615661864ca8}</Project>
+      <Name>ResultOf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TextCloud\TextCloud.csproj">
       <Project>{c04e3e6a-6dcd-44eb-9dfc-e718d4e9bb36}</Project>
       <Name>TextCloud</Name>

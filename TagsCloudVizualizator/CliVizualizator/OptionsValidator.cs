@@ -23,8 +23,7 @@ namespace CliVizualizator
                 .Then(ValidateColoringAlgorithmExist)
                 .Then(ValidateImageSize)
                 .Then(ValidateMinWordLength)
-                .Then(ValidateFontExist)
-                .RefineError(options.GetUsage());
+                .Then(ValidateFontExist);
         }
 
         private Result<Options> ValidateImageSize(Options programOptions)
@@ -41,14 +40,23 @@ namespace CliVizualizator
         private Result<Options> ValidateFontExist(Options programOptions)
         {
             var fontsCollections = new InstalledFontCollection();
-            return Validate(programOptions, o => fontsCollections.Families.Contains(new FontFamily(o.WordFont)),
+            return Validate(programOptions, o =>
+                {
+                    var isExist = false;
+                    foreach (var font in fontsCollections.Families)
+                    {
+                        if (font.Name == o.WordFont)
+                            isExist = true;
+                    }
+                    return isExist;
+                },
                 $"Font {programOptions.WordFont} is not supported");
         }
 
         private Result<Options> ValidateFileExist(Options programOptions)
         {
             return Validate(programOptions, o => File.Exists(o.InputFile),
-                $"{programOptions.InputFile} does not exist");
+                $"File '{programOptions.InputFile}' does not exist");
         }
 
         private Result<Options> ValidateImageFormat(Options programOptions)
