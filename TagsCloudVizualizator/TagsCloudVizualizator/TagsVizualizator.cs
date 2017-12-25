@@ -22,11 +22,7 @@ namespace TagsCloudVizualizator
 
         public void VizualizeCloudByTextFile(string textFile, string imageFile)
         {
-            var cloudHandlerResult = cloudHandler.GetNextWord(textFile);
-            if (!cloudHandlerResult.IsSuccess)
-            {
-                cloudHandlerResult.OnFail(PrintErrorAndExit);
-            }
+            var cloudHandlerResult = cloudHandler.GetNextWord(textFile).OnFail(PrintErrorAndExit);
 
             foreach (var word in cloudHandlerResult.GetValueOrThrow())
             {
