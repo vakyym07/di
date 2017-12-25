@@ -27,7 +27,7 @@ namespace TagCloudVisualizationTests
             int locationX, int locationY, int rectangleWidht, int rectangleHeight)
         {
             validator.RectangleIsCorrect(new Rectangle(
-                new Point(locationX, locationY), new Size(rectangleWidht, rectangleHeight))).Should().BeTrue();
+                new Point(locationX, locationY), new Size(rectangleWidht, rectangleHeight))).Should().BeFalse();
         }
 
         [TestCase(0, 0, 100, 100, TestName = "when location rectangle parametrs are correct")]

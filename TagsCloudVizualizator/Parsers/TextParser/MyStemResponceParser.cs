@@ -36,18 +36,16 @@ namespace TextParser
                 return Result.Fail<IEnumerable<Word>>(myStem.PerformResult.Error);
             xDocument.LoadXml(myStem.PerformResult.GetValueOrThrow());
             var xpath = "/html/body/se/w";
-            var words = new List<Word>();
             var xListNodes = xDocument?.SelectNodes(xpath);
             if (xListNodes == null)
                 return Result.Fail<IEnumerable<Word>>("MyStem internal error: cant't parse xml response from MyStem");
-            foreach (XmlNode node in xListNodes)
-                words.Add(new Word
+            return (from XmlNode node in xListNodes
+                select new Word
                 {
                     Value = node.InnerText,
                     Stem = GetStem(node),
                     Part = GetPartOfSpeech(node)
-                });
-            return words;
+                }).ToList();
         }
 
         private string GetStem(XmlNode node)

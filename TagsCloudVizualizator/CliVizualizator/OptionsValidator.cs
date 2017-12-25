@@ -28,40 +28,36 @@ namespace CliVizualizator
 
         private Result<Options> ValidateImageSize(Options programOptions)
         {
-            return Validate(programOptions, o => o.ImageWidth > 0 && o.ImageHeight > 0,
+            return Validate(programOptions, options => options.ImageWidth > 0 && options.ImageHeight > 0,
                 "Image witdh and height should be greater 0");
         }
 
         private Result<Options> ValidateMinWordLength(Options programOptions)
         {
-            return Validate(programOptions, o => o.MinWordLength > 0, "Min word length should be greater than 0");
+            return Validate(programOptions, options => options.MinWordLength > 0, "Min word length should be greater than 0");
         }
 
         private Result<Options> ValidateFontExist(Options programOptions)
         {
             var fontsCollections = new InstalledFontCollection();
-            return Validate(programOptions, o =>
+            return Validate(programOptions, options =>
                 {
-                    var isExist = false;
-                    foreach (var font in fontsCollections.Families)
-                    {
-                        if (font.Name == o.WordFont)
-                            isExist = true;
-                    }
-                    return isExist;
+                    return fontsCollections.Families
+                    .Where(font => font.Name == options.WordFont)
+                    .Aggregate(false, (current, font) => !current);
                 },
                 $"Font {programOptions.WordFont} is not supported");
         }
 
         private Result<Options> ValidateFileExist(Options programOptions)
         {
-            return Validate(programOptions, o => File.Exists(o.InputFile),
+            return Validate(programOptions, options => File.Exists(options.InputFile),
                 $"File '{programOptions.InputFile}' does not exist");
         }
 
         private Result<Options> ValidateImageFormat(Options programOptions)
         {
-            return Validate(programOptions, o => availableImageFormat.Contains(o.ImageFileFormat),
+            return Validate(programOptions, options => availableImageFormat.Contains(options.ImageFileFormat),
                 $"Image format {programOptions.ImageFileFormat} is not supported");
         }
 
@@ -73,7 +69,7 @@ namespace CliVizualizator
 
         private Result<Options> ValidateColoringAlgorithmExist(Options programOptions)
         {
-            return Validate(programOptions, o => availableColoringAlgorithmNumbers.Contains(o.ColoringAlgorithm),
+            return Validate(programOptions, options => availableColoringAlgorithmNumbers.Contains(options.ColoringAlgorithm),
                 $"Coloring algorithm with number {programOptions.ColoringAlgorithm} is not supported");
         }
 
